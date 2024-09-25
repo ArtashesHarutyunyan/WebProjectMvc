@@ -1,0 +1,36 @@
+﻿@using LibraryForProject.Models;
+@using LibraryForProject.Models.Authentication;
+@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<div class="container mt-5">
+    <h2>Search Results</h2>
+
+    @if (Model != null && Model.Any())
+    {
+        <ul class="list-group">
+            @foreach (var user in Model)
+            {
+                <li class="list-group-item">
+                    <h4>@user.UserName</h4>
+                    <p>Email: @user.Email</p>
+                    <a href="@Url.Action("ViewProfile", "Account", new { userId = user.Id })" class="btn btn-primary">View Profile</a>
+
+                    <!-- Form to add friend -->
+                    <form asp-action="AddFriend" method="post" style="display: inline;">
+                        <input type="hidden" name="friendUsername" value="@user.UserName" />
+                        <button type="submit" class="btn btn-secondary">Add Friend</button>
+                    </form>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            No users found.
+        </div>
+    }
+</div>

@@ -1,0 +1,50 @@
+﻿@using LibraryForProject.Models.Authentication;
+@model ApplicationUser
+
+@{
+    ViewData["Title"] = "View Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" alt="User Avatar" style="width: 150px;">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.UserName</h4>
+                    <p class="text-muted">@Model.Email</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>About @Model.UserName</h5>
+                </div>
+                <div class="card-body">
+                    <p>View and interact with @Model.UserName's profile. You can add them as a friend or view their posts.</p>
+                </div>
+            </div>
+
+            <!-- Button to add the user as a friend -->
+            <div class="mb-3">
+                <form asp-action="AddFriend" method="post">
+                    <input type="hidden" name="friendUsername" value="@Model.UserName" /> <!-- Use UserName instead of Id -->
+                    <button type="submit" class="btn btn-primary">Add Friend</button>
+                </form>
+            </div>
+
+            <!-- Example: Display posts if available -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>@Model.UserName's Posts</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Loop through posts if needed (similar to previous views) -->
+                    <p>No posts to show currently.</p> <!-- Placeholder -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

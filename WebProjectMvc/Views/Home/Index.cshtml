@@ -1,0 +1,85 @@
+﻿@using LibraryForProject.Models
+@using LibraryForProject.Models.Authentication
+@model UserProfileViewModel
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-center">
+                <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" alt="User Avatar" style="width: 150px;">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.User.UserName</h4>
+                    <p class="text-muted">@Model.User.Email</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>About Me</h5>
+                </div>
+                <div class="card-body">
+                    <p>Welcome, @Model.User.UserName! This is your personal dashboard where you can manage your account, view your friends, and more.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Friends</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        @* Example placeholder for friends. You can loop through a collection of friends here *@
+                        <li class="list-group-item">Friend 1</li>
+                        <li class="list-group-item">Friend 2</li>
+                        <li class="list-group-item">Friend 3</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3">Add New Friend</a>
+                </div>
+            </div>
+
+            <!-- Display Posts -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>My Posts</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Posts != null && Model.Posts.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var post in Model.Posts)
+                            {
+                                <li class="list-group-item">
+                                    <strong>@post.User.UserName</strong> posted:
+                                    <p>@post.Content</p>
+                                    <small class="text-muted">@post.CreatedAt.ToString("g")</small>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted">You have no posts yet.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Activity Feed</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">You logged in at @DateTime.Now</li>
+                        <li class="list-group-item">You updated your profile picture.</li>
+                        <li class="list-group-item">You added a new friend.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
